@@ -1,6 +1,9 @@
 import Quickshell
-import "widgets/bar"
+import "modules/bar"
 
 ShellRoot {
-    Bar {}
+    id: root
+    property bool enableBar: true
+
+    LazyLoader { active: root.enableBar; component: Bar {} }
 }
