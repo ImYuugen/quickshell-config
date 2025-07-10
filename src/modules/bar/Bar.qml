@@ -1,39 +1,22 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Hyprland
-import Quickshell.Services.UPower
-import Quickshell.Io
+import "root:/config"
 
 Scope {
     id: bar
-    property JsonObject config: JsonObject {
-        id: barConfig
-        property bool top: true
-        property bool logging: true
-        property int height: 40
-        property JsonObject modules: JsonObject {
-            property JsonObject workspaces: JsonObject {
-                property bool enable: true
-                property int shown: 10
-                property bool appIcons: true
-                property bool monochromeIcons: true
-            }
-        }
-    }
     
     PanelWindow {
         id: barRoot
         WlrLayershell.namespace: "quickshell:bar"
-        implicitHeight: barConfig.height
-        exclusiveZone: barConfig.height
+        implicitHeight: Appearance.bar.height
+        exclusiveZone: Appearance.bar.height
         // Let background Rectangle handle that
         color: "transparent"
         anchors {
-            top: barConfig.top
-            bottom: !barConfig.top
+            top: Appearance.bar.top
+            bottom: !Appearance.bar.top
             left: true
             right: true
         }
@@ -45,8 +28,8 @@ Scope {
                 left: parent.left
                 right: parent.right
             }
-            height: barConfig.height
-            implicitHeight: barConfig.height
+            height: Appearance.bar.height
+            implicitHeight: Appearance.bar.height
 
             // Background
             Rectangle {
@@ -56,6 +39,44 @@ Scope {
                 }
                 // FIXME: Temporary
                 color: "#202020"
+            }
+
+            // Left section
+            RowLayout {
+                id: leftSection
+                anchors.fill: parent
+                BarGroup {}
+                // OS Icon (Power menu)
+                // Window name
+            }
+            // Center section
+            RowLayout {
+                id: centerSection
+                anchors.centerIn: parent
+                BarGroup {
+                    id: centerSectionGroup
+                    Layout.preferredWidth: 500
+                    Layout.fillHeight: true
+
+                    Workspaces {}
+                    // Media info
+                    // Workspaces (dead center)
+                    // Time
+                }
+            }
+            // Right section
+            RowLayout {
+                id: rightSection
+                anchors.right: parent.right
+                BarGroup {
+                    // System Info
+                    // Top right corner: system tray
+                    SysTray {
+                        bar: barRoot
+                        Layout.fillWidth: false
+                        Layout.fillHeight: true
+                    }
+                }
             }
         }
     }

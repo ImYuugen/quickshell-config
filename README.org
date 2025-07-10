@@ -1,0 +1,2 @@
+** Credits
+Thanks to end-4 for their quickshell config: [[https://github.com/end-4/dots-hyprland/tree/main/.config/quickshell/ii]]

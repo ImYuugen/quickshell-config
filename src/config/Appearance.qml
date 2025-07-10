@@ -1,11 +1,13 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
     property QtObject font
     property QtObject options
+    property QtObject bar
 
     font: QtObject {
         property QtObject family: QtObject {
@@ -27,5 +29,19 @@ Singleton {
     options: QtObject {
         property bool darkmode: false
         property bool transparent: false
+    }
+
+    bar: QtObject {
+        property bool top: true
+        property bool logging: true
+        property int height: 40
+        property JsonObject modules: JsonObject {
+            property JsonObject workspaces: JsonObject {
+                property bool enable: true
+                property int shown: 10
+                property bool appIcons: true
+                property bool monochromeIcons: true
+            }
+        }
     }
 }
