@@ -57,14 +57,15 @@ Scope {
                     id: middleCenterGroup
                     Layout.fillHeight: true
 
+                    // Media info
                     // Workspaces
                     Workspaces {
                         id: hyprlandWidget
                         bar: barRoot
                         Layout.fillHeight: true
                     }
-                    // Media info
                     // Time
+                    Clock {}
                 }
             }
             // Right section
