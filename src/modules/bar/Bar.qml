@@ -44,7 +44,7 @@ Scope {
             // Left section
             RowLayout {
                 id: leftSection
-                anchors.fill: parent
+                anchors.left: parent.left
                 BarGroup {}
                 // OS Icon (Power menu)
                 // Window name
@@ -54,13 +54,16 @@ Scope {
                 id: centerSection
                 anchors.centerIn: parent
                 BarGroup {
-                    id: centerSectionGroup
-                    Layout.preferredWidth: 500
+                    id: middleCenterGroup
                     Layout.fillHeight: true
 
-                    Workspaces {}
+                    // Workspaces
+                    Workspaces {
+                        id: hyprlandWidget
+                        bar: barRoot
+                        Layout.fillHeight: true
+                    }
                     // Media info
-                    // Workspaces (dead center)
                     // Time
                 }
             }

@@ -2,9 +2,11 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
+import "root:/config"
 
 Item {
     id: root
+    visible: Appearance.bar.modules.systray.enabled
 
     required property var bar
 
@@ -24,6 +26,7 @@ Item {
             }
         }
 
+        // TODO: Reveal systray window
         Text {
             Layout.alignment: Qt.AlignVCenter
             font.pixelSize: 16

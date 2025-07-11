@@ -13,15 +13,17 @@ Item {
     Rectangle {
         id: background
         anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            right: parent.right
+            fill: parent
+            topMargin: 4
+            bottomMargin: 4
         }
-        color: "red"
+        // TODO: Remove this, this is for debugging
+        color: "#333333"
     }
 
     RowLayout {
         id: rowLayout
+        height: parent.height
         anchors {
             verticalCenter: parent.verticalCenter
             left: parent.left
