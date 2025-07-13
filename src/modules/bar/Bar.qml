@@ -74,6 +74,7 @@ Scope {
                 anchors.right: parent.right
                 BarGroup {
                     // System Info
+                    Battery {}
                     // Top right corner: system tray
                     SysTray {
                         bar: barRoot
