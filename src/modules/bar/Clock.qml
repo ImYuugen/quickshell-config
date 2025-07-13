@@ -7,7 +7,7 @@ Item {
     id: root
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: 32
-    readonly property list<string> youbi: ['月', '火', '水', '木', '金', '土', '日'];
+    readonly property list<string> youbi: ['日', '月', '火', '水', '木', '金', '土'];
 
     SystemClock {
         id: clock
@@ -23,7 +23,9 @@ Item {
         Text {
             id: kanjiDay
             font.pixelSize: Appearance.font.size.mezzobig
-            text: root.youbi[clock.date.getDay() - 1]
+            text: {
+                root.youbi[clock.date.getDay()]
+            }
         }
 
         ColumnLayout {
