@@ -5,8 +5,8 @@ import "root:/config"
 Item {
     id: root
     property real padding: 4
-    implicitHeight: Appearance.bar.height
-    height: Appearance.bar.height
+    implicitHeight: Config.bar.height
+    height: Config.bar.height
     implicitWidth: rowLayout.implicitWidth + padding * 2
     default property alias items: rowLayout.children
 
@@ -17,8 +17,7 @@ Item {
             topMargin: 4
             bottomMargin: 4
         }
-        // TODO: Remove this, this is for debugging
-        color: "#333333"
+        color: Appearance.colors.layer1
     }
 
     RowLayout {

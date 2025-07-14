@@ -19,25 +19,9 @@ Item {
         spacing: 4
         anchors.centerIn: parent
 
-        Rectangle {
-            implicitWidth: (root.charging ? boltIconLoader.item.width : 0)
-        }
         Text {
             Layout.alignment: Qt.AlignVCenter
             text: Math.round(root.percentage * 100)
-        }
-    }
-
-    Loader {
-        id: boltIconLoader
-        active: true
-        anchors.left: rowLayout.left
-        anchors.verticalCenter: rowLayout.verticalCenter
-        Connections {
-            target: root
-            function onChargingChanged() {
-                boltIconLoader.active = root.charging
-            }
         }
     }
 }

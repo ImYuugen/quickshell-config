@@ -1,13 +1,12 @@
 pragma Singleton
 import QtQuick
 import Quickshell
-import Quickshell.Io
 
 Singleton {
     id: root
     property QtObject font
-    property QtObject options
-    property QtObject bar
+    property QtObject theme
+    property alias colors: colors
 
     font: QtObject {
         property QtObject family: QtObject {
@@ -25,26 +24,27 @@ Singleton {
             property int bigississimo: 22
         }
     }
-    
-    options: QtObject {
-        property bool darkmode: false
-        property bool transparent: false
-    }
 
-    bar: QtObject {
-        property bool top: true
-        property bool logging: true
-        property int height: 40
-        property JsonObject modules: JsonObject {
-            property JsonObject hyprland: JsonObject {
-                property bool workspaces: true
-                property int shownWorkspaces: 10
-                property bool appIcons: true
-                property bool monochromeIcons: true
-                property bool submaps: true
+    theme: QtObject {
+        // From 0 to 1
+        property real transparency: 0
+        // TODO: 1: Find a way to switcharoo
+        property bool darkmode: false
+        property QtObject colors: QtObject {
+            id: colors
+            // TODO: 1: Find a way to switcharoo
+            default property alias mode: colors.dark;
+            //
+            property color layer0: mode.layer0
+            property color layer1: mode.layer1
+            // TODO: Colors
+            property QtObject light: QtObject {
+                property color layer0: "#FFFFFF"
+                property color layer1: "#CCCCCC"
             }
-            property JsonObject systray: JsonObject {
-                property bool enabled: true
+            property QtObject dark: QtObject {
+                property color layer0: "#111111"
+                property color layer1: "#333333"
             }
         }
     }

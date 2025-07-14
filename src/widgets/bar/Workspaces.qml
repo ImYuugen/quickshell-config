@@ -10,7 +10,7 @@ Item {
     readonly property HyprlandMonitor monitor: Hyprland.monitorFor(bar.screen)
 
     id: root
-    visible: Appearance.bar.modules.hyprland.workspaces
+    visible: Config.bar.modules.hyprland.workspaces
     property int shownWorkspaces: 10
     property int workspaceButtonWidth: 30
     property list<bool> workspaceOccupied: []

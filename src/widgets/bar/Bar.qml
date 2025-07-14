@@ -6,17 +6,17 @@ import "root:/config"
 
 Scope {
     id: bar
-    
+
     PanelWindow {
         id: barRoot
         WlrLayershell.namespace: "quickshell:bar"
-        implicitHeight: Appearance.bar.height
-        exclusiveZone: Appearance.bar.height
+        implicitHeight: Config.bar.height
+        exclusiveZone: Config.bar.height
         // Let background Rectangle handle that
         color: "transparent"
         anchors {
-            top: Appearance.bar.top
-            bottom: !Appearance.bar.top
+            top: Config.bar.top
+            bottom: !Config.bar.top
             left: true
             right: true
         }
@@ -28,8 +28,6 @@ Scope {
                 left: parent.left
                 right: parent.right
             }
-            height: Appearance.bar.height
-            implicitHeight: Appearance.bar.height
 
             // Background
             Rectangle {
@@ -37,8 +35,7 @@ Scope {
                 anchors {
                     fill: parent
                 }
-                // FIXME: Temporary
-                color: "#202020"
+                color: Appearance.colors.layer0;
             }
 
             // Left section

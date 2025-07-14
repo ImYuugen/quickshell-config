@@ -6,7 +6,7 @@ import "root:/config"
 
 Item {
     id: root
-    visible: Appearance.bar.modules.systray.enabled
+    visible: Config.bar.modules.systray.enabled
 
     required property var bar
 
