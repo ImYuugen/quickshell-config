@@ -1,2 +1,4 @@
 .envrc
 .direnv
+# Symlinked by quickshell
+.qmlls.ini
