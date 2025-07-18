@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Hyprland
-import "root:/config"
+import qs.config
 
 Item {
     required property var bar

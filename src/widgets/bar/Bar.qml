@@ -1,8 +1,9 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import "root:/config"
+import qs.config
 
 Scope {
     id: bar
@@ -11,9 +12,8 @@ Scope {
         id: barRoot
         WlrLayershell.namespace: "quickshell:bar"
         implicitHeight: Config.bar.height
-        exclusiveZone: Config.bar.height
-        // Let background Rectangle handle that
-        color: "transparent"
+        exclusiveZone: implicitHeight
+        color: Appearance.colors.layer0
         anchors {
             top: Config.bar.top
             bottom: !Config.bar.top
@@ -29,20 +29,26 @@ Scope {
                 right: parent.right
             }
 
-            // Background
-            Rectangle {
-                id: barBackground
-                anchors {
-                    fill: parent
-                }
-                color: Appearance.colors.layer0;
-            }
-
             // Left section
             RowLayout {
                 id: leftSection
                 anchors.left: parent.left
-                BarGroup {}
+                BarGroup {
+                    Button {
+                        implicitWidth: dmText.width
+                        implicitHeight: dmText.height
+                        onPressed: Appearance.theme.darkmode = !Appearance.theme.darkmode
+                        background: Rectangle {
+                            implicitWidth: dmText.width
+                            implicitHeight: dmText.height
+                            color: Appearance.theme.darkmode ? "lightgray" : "gray";
+                            Text {
+                                id: dmText
+                                text: "DARKMODE"
+                            }
+                        }
+                    }
+                }
                 // OS Icon (Power menu)
                 // Window name
             }

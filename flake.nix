@@ -27,10 +27,6 @@
           quickshellWith
           pkgs.kdePackages.qtdeclarative
         ];
-        shellHook = ''
-          export QMLLS_BUILD_DIRS=${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml/:${quickshellWith}/lib/qt-6/qml/
-          export QML_IMPORT_PATH=$PWD/src
-        '';
       };
     };
 }

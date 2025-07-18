@@ -26,14 +26,12 @@ Singleton {
     }
 
     theme: QtObject {
-        // From 0 to 1
-        property real transparency: 0
-        // TODO: 1: Find a way to switcharoo
-        property bool darkmode: false
+        id: theme
+        property bool darkmode: true
         property QtObject colors: QtObject {
             id: colors
-            // TODO: 1: Find a way to switcharoo
-            default property alias mode: colors.dark;
+            // Does this take up more memory than an alias ?
+            default property QtObject mode: theme.darkmode ? dark : light;
             //
             property color layer0: mode.layer0
             property color layer1: mode.layer1

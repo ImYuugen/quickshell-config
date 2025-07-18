@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "root:/config"
+import qs.config
 
 Item {
     id: root

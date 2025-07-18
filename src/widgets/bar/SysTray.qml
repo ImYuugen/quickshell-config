@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
-import "root:/config"
+import qs.config
 
 Item {
     id: root

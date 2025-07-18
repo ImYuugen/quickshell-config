@@ -1,7 +1,7 @@
 //@ pragma UseQApplication
 
 import Quickshell
-import "widgets/bar"
+import qs.widgets.bar
 
 ShellRoot {
     id: root
