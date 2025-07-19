@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.config
+import qs.widgets.utils
 
 Item {
     id: root
@@ -20,7 +21,7 @@ Item {
         anchors.centerIn: parent
         spacing: 4
 
-        Text {
+        StyledText {
             id: kanjiDay
             font.pixelSize: Appearance.font.size.mezzobig
             text: {
@@ -29,13 +30,13 @@ Item {
         }
 
         ColumnLayout {
-            Text {
+            StyledText {
                 id: date
                 font.pixelSize: Appearance.font.size.mezzosmall
                 text: Qt.formatDate(clock.date, "dd/MM")
             }
 
-            Text {
+            StyledText {
                 id: time
                 font.pixelSize: Appearance.font.size.mezzosmall
                 text: Qt.formatTime(clock.date, "hh:mm")
