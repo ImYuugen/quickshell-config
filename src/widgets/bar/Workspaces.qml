@@ -13,80 +13,55 @@ Item {
     visible: Config.bar.modules.hyprland.workspaces
     property int shownWorkspaces: 10
     property int workspaceButtonWidth: 30
-    property list<bool> workspaceOccupied: []
-
-    function updateWorkspaceOccupied() {
-        root.workspaceOccupied = Array.from(
-            Array(root.shownWorkspaces),
-            () => false
-        );
-        Hyprland.workspaces.values.forEach(ws => {
-            const id = ws.id - 1
-            if (id < 0 || id >= root.shownWorkspaces) { return; }
-            root.workspaceOccupied[id] = true;
-        });
-    }
-    Component.onCompleted: updateWorkspaceOccupied()
-    
+    property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values
+ 
     Connections {
         target: Hyprland.workspaces
-        function onValuesChanged() {
-            root.updateWorkspaceOccupied()
-        }
     }
 
     implicitWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
     implicitHeight: parent.height
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.MiddleButton
-        onPressed: (event) => {
-            Hyprland.dispatch("togglespecialworkspace");
-        }
-    }
-
     RowLayout {
         id: rowLayout
         z: 1
 
-        spacing: 0
+        spacing: 2
         anchors.fill: parent
         implicitHeight: parent.height
 
         Repeater {
             model: root.shownWorkspaces
 
-            Rectangle {
+            Item {
+                id: repRoot
                 required property int index
-                z: 1
-                implicitWidth: root.workspaceButtonWidth
-                implicitHeight: root.workspaceButtonWidth
-                radius: 5
-                color: root.workspaceOccupied[index] ? "white" : "black"
-            }
-        }
-    }
-    RowLayout {
-        id: rowLayoutNumbers
-        z: 3
-
-        spacing: 0
-        anchors.fill: parent
-        implicitHeight: parent.height
-
-        Repeater {
-            model: root.shownWorkspaces
-            Button {
-                required property int index
-                id: button
-                Layout.fillHeight: true
-                width: root.workspaceButtonWidth
-                onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
-                background: Item {
-                    id: workspaceButtonBackground
-                    implicitWidth: root.workspaceButtonWidth
-                    implicitHeight: root.workspaceButtonWidth
+                implicitWidth: wsRect.implicitWidth
+                implicitHeight: wsRect.implicitHeight
+                Button {
+                    id: button
+                    Layout.fillHeight: true
+                    width: root.workspaceButtonWidth
+                    onPressed: Hyprland.dispatch(`workspace ${repRoot.index + 1}`)
+                    background: Rectangle {
+                        id: wsRect
+                        z: 1
+                        implicitWidth: root.workspaceButtonWidth
+                        implicitHeight: root.workspaceButtonWidth
+                        radius: implicitWidth / 2
+                        color: {
+                            // TODO: Find a more efficient way ?
+                            if (Hyprland.focusedWorkspace.id === repRoot.index + 1) {
+                                return "red";
+                            }
+                            else if (root.workspaces.some(ws => ws.id === repRoot.index + 1)) {
+                                return "white";
+                            }
+                            else {
+                                return "black";
+                            }
+                        }
+                    }
                 }
             }
         }

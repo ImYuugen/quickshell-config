@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.config
+import qs.widgets.utils
 
 Scope {
     id: bar
@@ -42,7 +43,7 @@ Scope {
                             implicitWidth: dmText.width
                             implicitHeight: dmText.height
                             color: Appearance.theme.darkmode ? "lightgray" : "gray";
-                            Text {
+                            StyledText {
                                 id: dmText
                                 text: "DARKMODE"
                             }
