@@ -51,7 +51,7 @@ Item {
                         radius: implicitWidth / 2
                         color: {
                             // TODO: Find a more efficient way ?
-                            if (Hyprland.focusedWorkspace.id === repRoot.index + 1) {
+                            if (Hyprland.focusedWorkspace?.id === repRoot.index + 1) {
                                 return "red";
                             }
                             else if (root.workspaces.some(ws => ws.id === repRoot.index + 1)) {

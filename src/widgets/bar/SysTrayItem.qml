@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
@@ -8,12 +7,12 @@ MouseArea {
     id: root
     required property var bar
     required property SystemTrayItem item
-    property bool targetMenuOpen: false
-    property int trayItemWidth: 16
+
+    property int trayItemSize: 16
+    implicitHeight: trayItemSize
+    implicitWidth: trayItemSize
+
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    Layout.fillHeight: true
-    implicitHeight: trayItemWidth
-    implicitWidth: trayItemWidth
 
     onClicked: (event) => {
         switch (event.button) {
@@ -24,23 +23,29 @@ MouseArea {
             if (item.hasMenu) menu.open();
             break;
         }
-        event.accepted = true;
     }
 
     QsMenuAnchor {
         id: menu
+
         menu: root.item.menu
-        anchor.window: root.bar
-        anchor.rect.x: root.x + root.bar.width
-        anchor.rect.y: root.y
-        anchor.rect.height: root.height
+        anchor.item: root
     }
 
     IconImage {
         id: trayIcon
-        source: root.item.icon
+
+        implicitSize: root.trayItemSize
         anchors.centerIn: parent
-        width: parent.width
-        height: parent.height
+
+        source: {
+            let icon = root.item.icon;
+            if (icon.includes("?path=")) {
+                const [name, path] = icon.split("?path=");
+                icon = `file://${path}/${name.slice(name.lastIndexOf("/") + 1)}`;
+            }
+            return icon;
+        }
+        asynchronous: true
     }
 }
